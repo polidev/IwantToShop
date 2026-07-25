@@ -9,14 +9,22 @@ const Footer = lazy(() => import("./components/layout/Footer.jsx"));
 
 function App() {
   return (
-    <Suspense fallback="Loading...">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-      <Footer />
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center bg-canvas">
+          <p className="text-sm text-ink-faint">Loading...</p>
+        </div>
+      }
+    >
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+        <Footer />
+      </div>
     </Suspense>
   );
 }
