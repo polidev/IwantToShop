@@ -11,13 +11,12 @@ export default function Header() {
             <a href="/">Home</a>
           </li>
           <li>
+            <a href="/cart">Cart</a>
+          </li>
+          <li>
             {totalQuantity >= 0 && (
               <span className="cart-quantity">{totalQuantity}</span>
             )}
-          </li>
-
-          <li>
-            <a href="/cart">Cart</a>
           </li>
         </ul>
       </nav>

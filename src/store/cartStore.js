@@ -27,6 +27,8 @@ const useCartStore = create(
             };
           }
 
+          console.log("Adding new item to cart:", product); // log added for debugging
+
           return {
             items: [...state.items, { ...product, quantity: 1 }],
           };
@@ -48,7 +50,9 @@ const useCartStore = create(
           return {
             items: state.items
               .map((item) =>
-                item.id === productId ? { ...item, quantity } : item,
+                item.id === productId
+                  ? { ...item, quantity: item.quantity + quantity }
+                  : item,
               )
               .filter((item) => item.quantity > 0), // remove items with quantity  hints 0
           };
