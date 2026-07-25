@@ -46,17 +46,14 @@ const useCartStore = create(
 
       // update quantity
       updateQuantity: (productId, quantity) => {
-        set((state) => {
-          return {
-            items: state.items
-              .map((item) =>
-                item.id === productId
-                  ? { ...item, quantity: item.quantity + quantity }
-                  : item,
-              )
-              .filter((item) => item.quantity > 0), // remove items with quantity  hints 0
-          };
-        });
+        set((state) => ({
+          items: state.items.flatMap((item) => {
+            if (item.id !== productId) return [item];
+            const newQuantity = item.quantity + quantity;
+            if (newQuantity <= 0) return [];
+            return [{ ...item, quantity: newQuantity }];
+          }),
+        }));
       },
 
       // total price
